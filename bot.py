@@ -20,7 +20,7 @@ async def response(client, message):
         question = message.text
         user_id = message.from_user.id
         try:
-            r = requests.get(f"http://starkgpt.starkai.live/api?client_id={user_id}&message={question}&key="{KEY}"")
+            r = requests.get(f"http://starkgpt.starkai.live/api?client_id={user_id}&message={question}&key={KEY}")
             reply = r.json()["message"]
             await message.reply(reply)
             TEXT = f"**Question:** `{question}`\n**Response:** `{reply}`\n**Engine:** `API`"
