@@ -19,16 +19,17 @@ bot = Client("STARK", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 async def response(client, message):
         question = message.text
         user_id = message.from_user.id
+        msg = await message.reply("Thinking....")
         try:
             r = requests.get(f"http://starkgpt.starkai.live/api?client_id={user_id}&message={question}&key={KEY}")
             reply = r.json()["message"]
-            await message.reply(reply)
+            await msg.edit(reply)
             TEXT = f"**Question:** `{question}`\n**Response:** `{reply}`\n**Engine:** `API`"
             await bot.send_message(chat_id=CHAT_ID,text=TEXT)
             return
         except Exception:
              reply = chatbot.chat(question)
-             await message.reply(reply)
+             await msg.edit(reply)
              TEXT = f"**Question:** `{question}`\n**Response:** `{reply}`\n**Engine:** `Library`"
              await bot.send_message(chat_id=CHAT_ID,text=TEXT)
              return
