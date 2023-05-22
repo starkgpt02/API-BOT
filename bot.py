@@ -21,7 +21,7 @@ async def response(client, message):
         user_id = message.from_user.id
         msg = await message.reply("Thinking....")
         try:
-            r = requests.get(f"http://starkgpt.starkai.live/api?client_id={user_id}&message={question}&key={KEY}")
+            r = requests.get(f"https://gpt.api.starkai.live/api?client_id={user_id}&message={question}&key={KEY}")
             reply = r.json()["message"]
             await msg.edit(reply)
             TEXT = f"**Question:** `{question}`\n**Response:** `{reply}`\n**Engine:** `API`"
